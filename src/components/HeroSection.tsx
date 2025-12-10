@@ -3,7 +3,7 @@
 import { Sparkles, Play, CheckCircle } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import Image from "next/image";
-import dashboardMockup from "@/src/assets/dashboard-mockup.png";
+import dashboardMockup from "@/src/assets/dashboard-mockup.webp";
 
 const HeroSection = () => {
   return (

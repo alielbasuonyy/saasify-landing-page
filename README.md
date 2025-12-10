@@ -145,6 +145,12 @@ Edit the color variables in `app/globals.css`:
 ### Dark Mode
 ![Dark Mode Preview](./screenshots/dark-mode.png)
 
+### Light Mode - Mobile
+![Light Mode Mobile Preview](./screenshots/light-mode-mobile.png)
+
+### Dark Mode - Mobile
+![Dark Mode Mobile Preview](./screenshots/dark-mode-mobile.png)
+
 ## 🎯 Key Sections
 
 ### Hero Section
