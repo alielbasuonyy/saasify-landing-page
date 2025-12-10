@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Container from '@/components/Container';
 import Button from '@/components/Button';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Navbar() {
   return (
@@ -32,6 +33,7 @@ export default function Navbar() {
           </div>
           
           <div className="flex items-center space-x-4">
+            <ThemeToggle />
             <Button variant="outline" size="sm" className="hidden sm:inline-flex">
               Sign In
             </Button>
