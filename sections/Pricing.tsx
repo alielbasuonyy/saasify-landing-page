@@ -91,6 +91,18 @@ export default function Pricing() {
   };
 
   return (
+    <section id="pricing" className="py-16 sm:py-28">
+      <Container>
+        <div className="mx-auto max-w-2xl text-center">
+          <motion.h2
+            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Simple, transparent pricing
+          </motion.h2>
           <motion.p
             className="mt-4 text-lg text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
@@ -136,13 +148,11 @@ export default function Pricing() {
             </motion.span>
           )}
         </motion.div>
-                  
-                  <div className="mb-6">
-                    <span className="text-5xl font-bold">{calculatePrice(plan)}</span>
-                    {plan.monthlyPrice !== null && plan.monthlyPrice !== 0 && (
-                      <span className="text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
-                    )}
-                  </div>city: 0, y: 20 }}
+
+        {/* Seat Calculator for Pro Plan */}
+        <motion.div
+          className="mx-auto mt-10 max-w-md"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -186,18 +196,7 @@ export default function Pricing() {
           </div>
         </motion.div>
 
-        <motion.divh2>
-          <motion.p
-            className="mt-4 text-lg text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Choose the plan that&apos;s right for you. All plans include a 14-day free trial.
-          </motion.p>
-        </div>
-
+        {/* Pricing Cards */}
         <motion.div
           className="mt-20 grid gap-10 lg:grid-cols-3 lg:gap-14"
           variants={containerVariants}
@@ -222,8 +221,10 @@ export default function Pricing() {
                   </div>
                   
                   <div className="mb-6">
-                    <span className="text-5xl font-bold">{plan.price}</span>
-                    {plan.price !== 'Custom' && <span className="text-muted-foreground">/month</span>}
+                    <span className="text-5xl font-bold">{calculatePrice(plan)}</span>
+                    {plan.monthlyPrice !== null && plan.monthlyPrice !== 0 && (
+                      <span className="text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
+                    )}
                   </div>
 
                   <ul className="mb-8 flex-1 space-y-3">
@@ -245,6 +246,8 @@ export default function Pricing() {
                         <span className="text-sm text-muted-foreground">{feature}</span>
                       </li>
                     ))}
+                  </ul>
+
                   <Button
                     variant={plan.popular ? 'primary' : 'outline'}
                     className="w-full"
@@ -258,7 +261,5 @@ export default function Pricing() {
         </motion.div>
       </Container>
     </section>
-  );
-}   </section>
   );
 }

@@ -87,6 +87,26 @@ export default function Testimonials() {
   );
 
   return (
+    <section id="testimonials" className="py-16 sm:py-28 bg-muted/30">
+      <Container>
+        <div className="mx-auto max-w-2xl text-center">
+          <motion.h2
+            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Loved by teams everywhere
+          </motion.h2>
+          <motion.p
+            className="mt-4 text-lg text-muted-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            See what our customers have to say about their experience.
           </motion.p>
         </div>
 
@@ -181,26 +201,6 @@ export default function Testimonials() {
             </motion.div>
           )}
         </div>
-      </Container>
-    </section>
-  );
-}                 
-                  <p className="mb-6 flex-1 text-muted-foreground">
-                    &quot;{testimonial.content}&quot;
-                  </p>
-                  
-                  <div className="flex items-center">
-                    <div className="mr-3 text-3xl">{testimonial.avatar}</div>
-                    <div>
-                      <div className="font-semibold">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
       </Container>
     </section>
   );
