@@ -132,68 +132,189 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Product mockup with 3D tilt */}
+          {/* Premium Dashboard Preview */}
           <motion.div
             className="relative mx-auto mt-20 max-w-5xl sm:mt-24 lg:mt-32"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            <div className="relative">
-              {/* Glow effect behind mockup */}
-              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-blue-600/20 via-purple-600/20 to-transparent blur-3xl" />
+            {/* Subtle animated particles behind dashboard */}
+            <div className="absolute inset-0 -z-10 overflow-hidden">
+              {[
+                { left: '10%', top: '15%', size: 'h-1 w-1' },
+                { left: '90%', top: '25%', size: 'h-1.5 w-1.5' },
+                { left: '20%', top: '80%', size: 'h-1 w-1' },
+                { left: '85%', top: '70%', size: 'h-1 w-1' },
+              ].map((particle, i) => (
+                <motion.div
+                  key={i}
+                  className={`absolute ${particle.size} rounded-full bg-purple-500/15`}
+                  style={{ left: particle.left, top: particle.top }}
+                  animate={{
+                    y: [0, -20, 0],
+                    opacity: [0.1, 0.2, 0.1],
+                  }}
+                  transition={{
+                    duration: 4 + i,
+                    repeat: Infinity,
+                    delay: i * 0.5,
+                  }}
+                />
+              ))}
+            </div>
+
+            <div className="relative perspective-[2000px]">
+              {/* Soft glow around preview */}
+              <div className="absolute inset-0 -z-10 rounded-3xl shadow-[0_0_80px_-20px_rgba(120,80,255,0.4)]" />
               
-              {/* Dashboard mockup */}
-              <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br from-background/95 to-background/50 p-2 shadow-2xl backdrop-blur-sm sm:rounded-3xl lg:p-3">
-                <div className="aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-muted/80 to-muted sm:rounded-2xl">
-                  {/* Simulated dashboard interface */}
-                  <div className="flex h-full w-full flex-col">
-                    {/* Top bar */}
-                    <div className="flex items-center justify-between border-b border-border/30 px-4 py-3">
-                      <div className="flex gap-2">
-                        <div className="h-3 w-3 rounded-full bg-red-500/80" />
-                        <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
-                        <div className="h-3 w-3 rounded-full bg-green-500/80" />
-                      </div>
-                      <div className="flex gap-2">
-                        <div className="h-6 w-16 rounded bg-muted-foreground/10" />
-                        <div className="h-6 w-16 rounded bg-muted-foreground/10" />
-                      </div>
-                    </div>
-                    
-                    {/* Content area */}
-                    <div className="flex flex-1 gap-4 p-4">
-                      {/* Sidebar */}
-                      <div className="w-1/4 space-y-2">
-                        <div className="h-8 rounded bg-muted-foreground/10" />
-                        <div className="h-8 rounded bg-blue-600/20" />
-                        <div className="h-8 rounded bg-muted-foreground/10" />
-                        <div className="h-8 rounded bg-muted-foreground/10" />
+              {/* Glass container with 3D tilt effect */}
+              <motion.div
+                className="group relative overflow-hidden rounded-2xl bg-white/10 p-3 backdrop-blur-xl transition-all duration-700 ease-out hover:scale-[1.03] sm:rounded-3xl lg:p-6 lg:hover:rotate-[0.8deg]"
+                whileHover={{ y: -5 }}
+                style={{
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
+                }}
+              >
+                {/* Gradient accent border overlay */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/15 to-blue-500/15 opacity-0 transition-opacity duration-700 group-hover:opacity-100 sm:rounded-3xl" />
+                
+                {/* Glass glare on top-left corner */}
+                <div className="pointer-events-none absolute left-0 top-0 h-32 w-32 rounded-3xl bg-gradient-to-br from-white/20 to-transparent opacity-30 blur-2xl" />
+                
+                {/* Subtle reflections on edges */}
+                <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-purple-500/10 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl" />
+
+                {/* Dashboard preview */}
+                <div className="relative overflow-hidden rounded-xl bg-background/80 shadow-2xl backdrop-blur-sm sm:rounded-2xl">
+                  <div className="aspect-video overflow-hidden">
+                    {/* Realistic dashboard interface */}
+                    <div className="flex h-full w-full flex-col">
+                      {/* Top navigation bar */}
+                      <div className="flex items-center justify-between border-b border-border/30 bg-muted/30 px-4 py-3 backdrop-blur-sm">
+                        <div className="flex items-center gap-3">
+                          <div className="flex gap-1.5">
+                            <div className="h-3 w-3 rounded-full bg-red-500/80" />
+                            <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
+                            <div className="h-3 w-3 rounded-full bg-green-500/80" />
+                          </div>
+                          <div className="hidden h-6 w-48 rounded bg-muted-foreground/10 sm:block" />
+                        </div>
+                        <div className="flex gap-2">
+                          <div className="h-6 w-6 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20" />
+                          <div className="hidden h-6 w-20 rounded bg-muted-foreground/10 sm:block" />
+                        </div>
                       </div>
                       
-                      {/* Main content */}
-                      <div className="flex-1 space-y-3">
-                        <div className="h-10 w-2/3 rounded bg-muted-foreground/10" />
-                        <div className="grid grid-cols-3 gap-3">
-                          <div className="h-24 rounded-lg bg-gradient-to-br from-blue-600/20 to-blue-600/10 p-3">
-                            <div className="mb-2 h-3 w-16 rounded bg-blue-600/30" />
-                            <div className="h-6 w-12 rounded bg-blue-600/40" />
+                      {/* Main content area */}
+                      <div className="flex flex-1 gap-3 p-3 sm:gap-4 sm:p-4">
+                        {/* Sidebar */}
+                        <div className="hidden w-1/5 space-y-2 sm:block">
+                          <div className="h-7 rounded bg-muted-foreground/5" />
+                          <div className="h-7 rounded bg-gradient-to-r from-purple-500/20 to-blue-500/20 shadow-sm" />
+                          <div className="h-7 rounded bg-muted-foreground/5" />
+                          <div className="h-7 rounded bg-muted-foreground/5" />
+                          <div className="mt-4 h-7 rounded bg-muted-foreground/5" />
+                        </div>
+                        
+                        {/* Main dashboard content */}
+                        <div className="flex-1 space-y-3">
+                          {/* Header with title */}
+                          <div className="flex items-center justify-between">
+                            <div className="h-8 w-1/2 rounded bg-muted-foreground/10" />
+                            <div className="hidden h-8 w-24 rounded-lg bg-gradient-to-r from-purple-500/20 to-blue-500/20 sm:block" />
                           </div>
-                          <div className="h-24 rounded-lg bg-gradient-to-br from-purple-600/20 to-purple-600/10 p-3">
-                            <div className="mb-2 h-3 w-16 rounded bg-purple-600/30" />
-                            <div className="h-6 w-12 rounded bg-purple-600/40" />
+                          
+                          {/* Analytics cards */}
+                          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+                            <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-blue-600/20 to-blue-600/5 p-3 shadow-sm transition-all hover:shadow-md">
+                              <div className="absolute right-0 top-0 h-16 w-16 rounded-full bg-blue-500/10 blur-2xl" />
+                              <div className="relative">
+                                <div className="mb-2 h-3 w-16 rounded bg-blue-600/30" />
+                                <div className="h-6 w-14 rounded bg-blue-600/50" />
+                                <div className="mt-2 h-1 w-full rounded-full bg-blue-600/20">
+                                  <div className="h-1 w-2/3 rounded-full bg-gradient-to-r from-blue-500 to-blue-400" />
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-600/20 to-purple-600/5 p-3 shadow-sm transition-all hover:shadow-md">
+                              <div className="absolute right-0 top-0 h-16 w-16 rounded-full bg-purple-500/10 blur-2xl" />
+                              <div className="relative">
+                                <div className="mb-2 h-3 w-16 rounded bg-purple-600/30" />
+                                <div className="h-6 w-14 rounded bg-purple-600/50" />
+                                <div className="mt-2 h-1 w-full rounded-full bg-purple-600/20">
+                                  <div className="h-1 w-4/5 rounded-full bg-gradient-to-r from-purple-500 to-purple-400" />
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="group relative col-span-2 overflow-hidden rounded-lg bg-gradient-to-br from-pink-600/20 to-pink-600/5 p-3 shadow-sm transition-all hover:shadow-md sm:col-span-1">
+                              <div className="absolute right-0 top-0 h-16 w-16 rounded-full bg-pink-500/10 blur-2xl" />
+                              <div className="relative">
+                                <div className="mb-2 h-3 w-16 rounded bg-pink-600/30" />
+                                <div className="h-6 w-14 rounded bg-pink-600/50" />
+                                <div className="mt-2 h-1 w-full rounded-full bg-pink-600/20">
+                                  <div className="h-1 w-1/2 rounded-full bg-gradient-to-r from-pink-500 to-pink-400" />
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div className="h-24 rounded-lg bg-gradient-to-br from-pink-600/20 to-pink-600/10 p-3">
-                            <div className="mb-2 h-3 w-16 rounded bg-pink-600/30" />
-                            <div className="h-6 w-12 rounded bg-pink-600/40" />
+                          
+                          {/* Chart area with neon accent strokes */}
+                          <div className="relative overflow-hidden rounded-lg bg-muted/30 p-4 backdrop-blur-sm">
+                            <div className="mb-3 flex items-center justify-between">
+                              <div className="h-4 w-24 rounded bg-muted-foreground/10" />
+                              <div className="flex gap-2">
+                                <div className="h-4 w-12 rounded-full bg-muted-foreground/10" />
+                                <div className="h-4 w-12 rounded-full bg-muted-foreground/10" />
+                              </div>
+                            </div>
+                            
+                            {/* Minimal chart with grid */}
+                            <div className="relative h-24 w-full">
+                              {/* Grid lines */}
+                              <div className="absolute inset-0 flex flex-col justify-between">
+                                {[...Array(4)].map((_, i) => (
+                                  <div key={i} className="h-px w-full bg-border/20" />
+                                ))}
+                              </div>
+                              
+                              {/* Chart line with neon glow */}
+                              <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
+                                <defs>
+                                  <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stopColor="rgb(139, 92, 246)" stopOpacity="0.6" />
+                                    <stop offset="50%" stopColor="rgb(59, 130, 246)" stopOpacity="0.6" />
+                                    <stop offset="100%" stopColor="rgb(236, 72, 153)" stopOpacity="0.6" />
+                                  </linearGradient>
+                                  <filter id="glow">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                    <feMerge>
+                                      <feMergeNode in="coloredBlur"/>
+                                      <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                  </filter>
+                                </defs>
+                                <polyline
+                                  fill="none"
+                                  stroke="url(#chartGradient)"
+                                  strokeWidth="2"
+                                  filter="url(#glow)"
+                                  points="0,80 25,60 50,45 75,50 100,20"
+                                  vectorEffect="non-scaling-stroke"
+                                />
+                              </svg>
+                            </div>
                           </div>
                         </div>
-                        <div className="h-32 rounded-lg bg-muted-foreground/5" />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 
