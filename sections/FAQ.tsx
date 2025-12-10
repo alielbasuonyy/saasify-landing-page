@@ -56,7 +56,7 @@ export default function FAQ() {
             Frequently asked questions
           </motion.h2>
           <motion.p
-            className="mt-4 text-lg text-muted-foreground"
+            className="text-base text-slate-300 md:text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -76,7 +76,7 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-border/80"
+              className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all duration-300 hover:border-white/20 hover:bg-white/10"
             >
               <button
                 onClick={() => toggleAccordion(index)}

@@ -87,11 +87,11 @@ export default function Testimonials() {
   );
 
   return (
-    <section id="testimonials" className="py-16 sm:py-28 bg-muted/30">
+    <section id="testimonials" className="py-20 md:py-28 bg-slate-900/50">
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center space-y-3">
           <motion.h2
-            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+            className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -100,7 +100,7 @@ export default function Testimonials() {
             Loved by teams everywhere
           </motion.h2>
           <motion.p
-            className="mt-4 text-lg text-muted-foreground"
+            className="text-base text-slate-300 md:text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -111,7 +111,7 @@ export default function Testimonials() {
         </div>
 
         <div
-          className="relative mt-20"
+          className="relative mt-16"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >

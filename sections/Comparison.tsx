@@ -53,10 +53,10 @@ export default function Comparison() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            How we compare
+            See how we compare
           </motion.h2>
           <motion.p
-            className="mt-4 text-lg text-muted-foreground"
+            className="text-base text-slate-300 md:text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -67,7 +67,7 @@ export default function Comparison() {
         </div>
 
         <motion.div
-          className="mt-12 overflow-hidden rounded-2xl border border-border bg-card shadow-lg"
+          className="mt-16 overflow-hidden rounded-2xl border border-white/10 bg-white/5"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

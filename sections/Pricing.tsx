@@ -91,11 +91,11 @@ export default function Pricing() {
   };
 
   return (
-    <section id="pricing" className="py-16 sm:py-28">
+    <section id="pricing" className="relative py-20 md:py-28 bg-gradient-to-b from-slate-950/60 to-slate-900/80">
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center space-y-3">
           <motion.h2
-            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+            className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -104,7 +104,7 @@ export default function Pricing() {
             Simple, transparent pricing
           </motion.h2>
           <motion.p
-            className="mt-4 text-lg text-muted-foreground"
+            className="text-base text-slate-300 md:text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -116,26 +116,26 @@ export default function Pricing() {
 
         {/* Billing Toggle */}
         <motion.div
-          className="mt-10 flex items-center justify-center gap-4"
+          className="mt-12 flex items-center justify-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <span className={`text-sm font-medium transition-colors ${!isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
+          <span className={`text-sm font-medium transition-colors ${!isYearly ? 'text-white' : 'text-slate-400'}`}>
             Monthly
           </span>
           <button
             onClick={() => setIsYearly(!isYearly)}
-            className="relative h-7 w-12 rounded-full bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="relative h-7 w-12 rounded-full bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500"
           >
             <motion.div
-              className="absolute top-1 h-5 w-5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md"
+              className="absolute top-1 h-5 w-5 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 shadow-md"
               animate={{ left: isYearly ? '24px' : '4px' }}
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             />
           </button>
-          <span className={`text-sm font-medium transition-colors ${isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
+          <span className={`text-sm font-medium transition-colors ${isYearly ? 'text-white' : 'text-slate-400'}`}>
             Yearly
           </span>
           {isYearly && (
@@ -157,14 +157,14 @@ export default function Pricing() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div className="rounded-xl border border-border bg-card p-6">
-            <label className="mb-3 block text-sm font-medium">
+          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+            <label className="mb-3 block text-sm font-medium text-white">
               Number of team members
             </label>
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setSeats(Math.max(1, seats - 1))}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background transition-colors hover:bg-accent"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
               >
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
@@ -177,20 +177,20 @@ export default function Pricing() {
                   max="100"
                   value={seats}
                   onChange={(e) => setSeats(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-full rounded-lg border border-border bg-background px-4 py-2 text-center text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-center text-lg font-semibold text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
               <button
                 onClick={() => setSeats(Math.min(100, seats + 1))}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background transition-colors hover:bg-accent"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
               >
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
               </button>
             </div>
-            <p className="mt-3 text-center text-sm text-muted-foreground">
-              Pro plan total: <span className="font-semibold text-foreground">{calculatePrice(pricingPlans[1])}</span>
+            <p className="mt-3 text-center text-sm text-slate-400">
+              Pro plan total: <span className="font-semibold text-white">{calculatePrice(pricingPlans[1])}</span>
               {isYearly ? '/year' : '/month'}
             </p>
           </div>
@@ -198,7 +198,7 @@ export default function Pricing() {
 
         {/* Pricing Cards */}
         <motion.div
-          className="mt-20 grid gap-10 lg:grid-cols-3 lg:gap-14"
+          className="mt-16 grid gap-8 md:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -207,55 +207,99 @@ export default function Pricing() {
           {pricingPlans.map((plan, index) => (
             <motion.div key={index} variants={itemVariants} className="relative">
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-1 text-sm font-medium text-white">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                  <span className="rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 px-4 py-1 text-sm font-medium text-white shadow-lg">
                     Most Popular
                   </span>
                 </div>
               )}
-              <Card className={`h-full ${plan.popular ? 'border-blue-600 shadow-lg ring-2 ring-blue-600/20' : ''}`}>
-                <div className="flex h-full flex-col">
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold">{plan.name}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground">{plan.description}</p>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <span className="text-5xl font-bold">{calculatePrice(plan)}</span>
-                    {plan.monthlyPrice !== null && plan.monthlyPrice !== 0 && (
-                      <span className="text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
-                    )}
-                  </div>
+              
+              {/* Highlighted card with gradient border */}
+              {plan.popular ? (
+                <div className="relative h-full overflow-hidden rounded-2xl border border-transparent bg-gradient-to-br from-violet-500/80 to-cyan-500/80 p-[1px]">
+                  <div className="h-full rounded-2xl bg-slate-950 p-6 sm:p-8">
+                    <div className="flex h-full flex-col">
+                      <div className="mb-6">
+                        <h3 className="text-2xl font-semibold text-white">{plan.name}</h3>
+                        <p className="mt-2 text-sm text-slate-400">{plan.description}</p>
+                      </div>
+                      
+                      <div className="mb-6">
+                        <span className="text-5xl font-semibold text-white">{calculatePrice(plan)}</span>
+                        {plan.monthlyPrice !== null && plan.monthlyPrice !== 0 && (
+                          <span className="text-slate-400">/{isYearly ? 'year' : 'month'}</span>
+                        )}
+                      </div>
 
-                  <ul className="mb-8 flex-1 space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start">
-                        <svg
-                          className="mr-3 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        <span className="text-sm text-muted-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                      <ul className="mb-8 flex-1 space-y-3">
+                        {plan.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-start">
+                            <svg
+                              className="mr-3 mt-0.5 h-5 w-5 flex-shrink-0 text-violet-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                            <span className="text-sm text-slate-300">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
 
-                  <Button
-                    variant={plan.popular ? 'primary' : 'outline'}
-                    className="w-full"
-                  >
-                    {plan.monthlyPrice === null ? 'Contact Sales' : 'Get Started'}
-                  </Button>
+                      <button className="w-full rounded-xl bg-gradient-to-r from-violet-500 to-indigo-500 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:shadow-violet-500/50">
+                        {plan.monthlyPrice === null ? 'Contact Sales' : 'Get Started'}
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </Card>
+              ) : (
+                <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 transition-all hover:border-white/20 hover:bg-white/10">
+                  <div className="flex h-full flex-col">
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-semibold text-white">{plan.name}</h3>
+                      <p className="mt-2 text-sm text-slate-400">{plan.description}</p>
+                    </div>
+                    
+                    <div className="mb-6">
+                      <span className="text-5xl font-semibold text-white">{calculatePrice(plan)}</span>
+                      {plan.monthlyPrice !== null && plan.monthlyPrice !== 0 && (
+                        <span className="text-slate-400">/{isYearly ? 'year' : 'month'}</span>
+                      )}
+                    </div>
+
+                    <ul className="mb-8 flex-1 space-y-3">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start">
+                          <svg
+                            className="mr-3 mt-0.5 h-5 w-5 flex-shrink-0 text-slate-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className="text-sm text-slate-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <button className="w-full rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white transition-all hover:bg-white/10">
+                      {plan.monthlyPrice === null ? 'Contact Sales' : 'Get Started'}
+                    </button>
+                  </div>
+                </div>
+              )}
             </motion.div>
           ))}
         </motion.div>
