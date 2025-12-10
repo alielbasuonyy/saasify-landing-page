@@ -1,21 +1,27 @@
-import Hero from '@/sections/Hero';
-import Features from '@/sections/Features';
-import Pricing from '@/sections/Pricing';
-import Comparison from '@/sections/Comparison';
-import Testimonials from '@/sections/Testimonials';
-import FAQ from '@/sections/FAQ';
-import Footer from '@/components/Footer';
+import ComparisonSection from "@/src/components/ComparisonSection";
+import FAQSection from "@/src/components/FAQSection";
+import FeaturesSection from "@/src/components/FeaturesSection";
+import Header from "@/src/components/Header";
+import HeroSection from "@/src/components/HeroSection";
+import PricingSection from "@/src/components/PricingSection";
+import TestimonialsSection from "@/src/components/TestimonialsSection";
+import Footer from "@/src/components/Footer";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Hero />
-      <Features />
-      <Pricing />
-      <Comparison />
-      <Testimonials />
-      <FAQ />
-      <Footer />
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-16">
+          <HeroSection />
+          <FeaturesSection />
+          <ComparisonSection />
+          <PricingSection />
+          <TestimonialsSection />
+          <FAQSection />
+          <Footer />
+        </main>
+      </div>
     </main>
   );
 }
