@@ -72,11 +72,11 @@ const itemVariants = {
 
 export default function Features() {
   return (
-    <section id="features" className="py-16 sm:py-28 bg-muted/30">
+    <section id="features" className="py-20 md:py-28">
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center space-y-3">
           <motion.h2
-            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+            className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -85,7 +85,7 @@ export default function Features() {
             Everything you need to succeed
           </motion.h2>
           <motion.p
-            className="mt-4 text-lg text-muted-foreground"
+            className="text-base text-slate-300 md:text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -96,7 +96,7 @@ export default function Features() {
         </div>
 
         <motion.div
-          className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid gap-8 md:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -104,29 +104,22 @@ export default function Features() {
         >
           {features.map((feature, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <div className="group relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-card to-card/50 p-[1px] transition-all duration-300 hover:scale-105">
-                {/* Gradient border */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 transition-opacity duration-300 group-hover:opacity-100`} />
-                <div className="absolute inset-[1px] rounded-2xl bg-card" />
-                
-                {/* Content */}
-                <div className="relative flex h-full flex-col p-8">
-                  {/* Icon with glow */}
-                  <div className="mb-6 inline-flex">
-                    <div className={`relative flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${feature.gradient} shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:shadow-${feature.glowColor}/50`}>
-                      <div className="text-3xl">{feature.icon}</div>
-                      {/* Glow effect */}
-                      <div className={`absolute inset-0 -z-10 rounded-xl bg-gradient-to-br ${feature.gradient} opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-60`} />
-                    </div>
+              <div className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:shadow-2xl hover:shadow-violet-500/10">
+                {/* Icon with gradient circle */}
+                <div className="mb-6 inline-flex">
+                  <div className={`relative flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${feature.gradient} shadow-lg`}>
+                    <span className="text-2xl">{feature.icon}</span>
+                    {/* Subtle glow on hover */}
+                    <div className={`absolute inset-0 -z-10 rounded-xl bg-gradient-to-br ${feature.gradient} opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-50`} />
                   </div>
-                  
-                  <h3 className="mb-3 text-xl font-semibold transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:${feature.gradient} group-hover:bg-clip-text group-hover:text-transparent">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
-                    {feature.description}
-                  </p>
                 </div>
+                
+                <h3 className="mb-3 text-xl font-semibold text-white">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-400 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             </motion.div>
           ))}
