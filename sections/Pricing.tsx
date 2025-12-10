@@ -72,7 +72,7 @@ const itemVariants = {
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-24 sm:py-32">
+    <section id="pricing" className="py-16 sm:py-28">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <motion.h2
@@ -96,7 +96,7 @@ export default function Pricing() {
         </div>
 
         <motion.div
-          className="mt-20 grid gap-8 lg:grid-cols-3"
+          className="mt-20 grid gap-10 lg:grid-cols-3 lg:gap-14"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

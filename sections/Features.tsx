@@ -60,7 +60,7 @@ const itemVariants = {
 
 export default function Features() {
   return (
-    <section id="features" className="py-24 sm:py-32 bg-muted/30">
+    <section id="features" className="py-16 sm:py-28 bg-muted/30">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <motion.h2
@@ -84,7 +84,7 @@ export default function Features() {
         </div>
 
         <motion.div
-          className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
