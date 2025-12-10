@@ -1,7 +1,9 @@
+import Hero from '@/sections/Hero';
+
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <h1>SaaS Landing Page</h1>
+      <Hero />
     </main>
   );
 }
