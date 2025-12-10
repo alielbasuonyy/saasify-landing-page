@@ -66,7 +66,7 @@ const itemVariants = {
 
 export default function Testimonials() {
   return (
-    <section className="py-20 sm:py-32">
+    <section id="testimonials" className="py-20 sm:py-32">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <motion.h2

@@ -72,7 +72,7 @@ const itemVariants = {
 
 export default function Pricing() {
   return (
-    <section className="py-20 sm:py-32">
+    <section id="pricing" className="py-20 sm:py-32">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <motion.h2

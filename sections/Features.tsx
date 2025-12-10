@@ -60,7 +60,7 @@ const itemVariants = {
 
 export default function Features() {
   return (
-    <section className="py-20 sm:py-32">
+    <section id="features" className="py-20 sm:py-32">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <motion.h2
