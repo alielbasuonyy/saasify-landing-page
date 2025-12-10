@@ -6,7 +6,7 @@ import Button from '@/components/Button';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-32">
+    <section className="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-40">
       <Container>
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
