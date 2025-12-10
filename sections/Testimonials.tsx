@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Container from '@/components/Container';
 import Card from '@/components/Card';
 
@@ -65,53 +66,125 @@ const itemVariants = {
 };
 
 export default function Testimonials() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const testimonialsPerPage = 3;
+  const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
+
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalPages);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, totalPages]);
+
+  const currentTestimonials = testimonials.slice(
+    currentIndex * testimonialsPerPage,
+    (currentIndex + 1) * testimonialsPerPage
+  );
+
   return (
-    <section id="testimonials" className="py-16 sm:py-28 bg-muted/30">
-      <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <motion.h2
-            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Loved by teams everywhere
-          </motion.h2>
-          <motion.p
-            className="mt-4 text-lg text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            See what our customers have to say about their experience.
           </motion.p>
         </div>
 
-        <motion.div
-          className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+        <div
+          className="relative mt-20"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          {testimonials.map((testimonial, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <Card className="h-full">
-                <div className="flex h-full flex-col">
-                  <div className="mb-4 flex items-center space-x-1 text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <svg
-                        key={i}
-                        className="h-5 w-5 fill-current"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
-                    ))}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.5 }}
+              className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {currentTestimonials.map((testimonial, index) => (
+                <Card key={index} className="h-full">
+                  <div className="flex h-full flex-col">
+                    <div className="mb-4 flex items-center space-x-1 text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className="h-5 w-5 fill-current"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      ))}
+                    </div>
+                    
+                    <p className="mb-6 flex-1 text-muted-foreground">
+                      &quot;{testimonial.content}&quot;
+                    </p>
+                    
+                    <div className="flex items-center">
+                      <div className="mr-3 text-3xl">{testimonial.avatar}</div>
+                      <div>
+                        <div className="font-semibold">{testimonial.name}</div>
+                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      </div>
+                    </div>
                   </div>
-                  
+                </Card>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Carousel Controls */}
+          <div className="mt-8 flex items-center justify-center gap-4">
+            <button
+              onClick={() => setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background transition-colors hover:bg-accent"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            <div className="flex gap-2">
+              {[...Array(totalPages)].map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`h-2 rounded-full transition-all ${
+                    index === currentIndex
+                      ? 'w-8 bg-gradient-to-r from-blue-600 to-purple-600'
+                      : 'w-2 bg-muted-foreground/30'
+                  }`}
+                />
+              ))}
+            </div>
+            
+            <button
+              onClick={() => setCurrentIndex((prev) => (prev + 1) % totalPages)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background transition-colors hover:bg-accent"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+
+          {isPaused && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute right-4 top-4 rounded-full bg-background/80 px-3 py-1 text-xs font-medium backdrop-blur-sm"
+            >
+              Paused
+            </motion.div>
+          )}
+        </div>
+      </Container>
+    </section>
+  );
+}                 
                   <p className="mb-6 flex-1 text-muted-foreground">
                     &quot;{testimonial.content}&quot;
                   </p>

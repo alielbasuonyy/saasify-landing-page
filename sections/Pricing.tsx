@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Container from '@/components/Container';
 import Card from '@/components/Card';
@@ -8,7 +9,8 @@ import Button from '@/components/Button';
 const pricingPlans = [
   {
     name: 'Starter',
-    price: '$0',
+    monthlyPrice: 0,
+    yearlyPrice: 0,
     description: 'Perfect for trying out our platform',
     features: [
       'Up to 3 projects',
@@ -18,10 +20,12 @@ const pricingPlans = [
       'Basic integrations',
     ],
     popular: false,
+    perSeat: false,
   },
   {
     name: 'Pro',
-    price: '$29',
+    monthlyPrice: 29,
+    yearlyPrice: 290,
     description: 'Best for growing teams',
     features: [
       'Unlimited projects',
@@ -32,10 +36,12 @@ const pricingPlans = [
       'Custom workflows',
     ],
     popular: true,
+    perSeat: true,
   },
   {
     name: 'Enterprise',
-    price: 'Custom',
+    monthlyPrice: null,
+    yearlyPrice: null,
     description: 'For large organizations',
     features: [
       'Everything in Pro',
@@ -46,6 +52,7 @@ const pricingPlans = [
       'Advanced security',
     ],
     popular: false,
+    perSeat: false,
   },
 ];
 
@@ -71,19 +78,115 @@ const itemVariants = {
 };
 
 export default function Pricing() {
+  const [isYearly, setIsYearly] = useState(false);
+  const [seats, setSeats] = useState(1);
+
+  const calculatePrice = (plan: typeof pricingPlans[0]) => {
+    if (plan.monthlyPrice === null) return 'Custom';
+    if (plan.monthlyPrice === 0) return '$0';
+    
+    const basePrice = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
+    const total = plan.perSeat ? basePrice * seats : basePrice;
+    return `$${total}`;
+  };
+
   return (
-    <section id="pricing" className="py-16 sm:py-28">
-      <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <motion.h2
-            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+          <motion.p
+            className="mt-4 text-lg text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Simple, transparent pricing
-          </motion.h2>
+            Choose the plan that&apos;s right for you. All plans include a 14-day free trial.
+          </motion.p>
+        </div>
+
+        {/* Billing Toggle */}
+        <motion.div
+          className="mt-10 flex items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <span className={`text-sm font-medium transition-colors ${!isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
+            Monthly
+          </span>
+          <button
+            onClick={() => setIsYearly(!isYearly)}
+            className="relative h-7 w-12 rounded-full bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
+            <motion.div
+              className="absolute top-1 h-5 w-5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-md"
+              animate={{ left: isYearly ? '24px' : '4px' }}
+              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            />
+          </button>
+          <span className={`text-sm font-medium transition-colors ${isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
+            Yearly
+          </span>
+          {isYearly && (
+            <motion.span
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="ml-2 rounded-full bg-green-600/10 px-3 py-1 text-xs font-semibold text-green-600"
+            >
+              Save 17%
+            </motion.span>
+          )}
+        </motion.div>
+                  
+                  <div className="mb-6">
+                    <span className="text-5xl font-bold">{calculatePrice(plan)}</span>
+                    {plan.monthlyPrice !== null && plan.monthlyPrice !== 0 && (
+                      <span className="text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
+                    )}
+                  </div>city: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className="rounded-xl border border-border bg-card p-6">
+            <label className="mb-3 block text-sm font-medium">
+              Number of team members
+            </label>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setSeats(Math.max(1, seats - 1))}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background transition-colors hover:bg-accent"
+              >
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                </svg>
+              </button>
+              <div className="flex-1">
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={seats}
+                  onChange={(e) => setSeats(Math.max(1, parseInt(e.target.value) || 1))}
+                  className="w-full rounded-lg border border-border bg-background px-4 py-2 text-center text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+              <button
+                onClick={() => setSeats(Math.min(100, seats + 1))}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background transition-colors hover:bg-accent"
+              >
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+            </div>
+            <p className="mt-3 text-center text-sm text-muted-foreground">
+              Pro plan total: <span className="font-semibold text-foreground">{calculatePrice(pricingPlans[1])}</span>
+              {isYearly ? '/year' : '/month'}
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.divh2>
           <motion.p
             className="mt-4 text-lg text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
@@ -142,13 +245,11 @@ export default function Pricing() {
                         <span className="text-sm text-muted-foreground">{feature}</span>
                       </li>
                     ))}
-                  </ul>
-
                   <Button
                     variant={plan.popular ? 'primary' : 'outline'}
                     className="w-full"
                   >
-                    {plan.price === 'Custom' ? 'Contact Sales' : 'Get Started'}
+                    {plan.monthlyPrice === null ? 'Contact Sales' : 'Get Started'}
                   </Button>
                 </div>
               </Card>
@@ -157,5 +258,7 @@ export default function Pricing() {
         </motion.div>
       </Container>
     </section>
+  );
+}   </section>
   );
 }
