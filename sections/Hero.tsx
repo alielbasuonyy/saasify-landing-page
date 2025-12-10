@@ -6,7 +6,7 @@ import Button from '@/components/Button';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-32">
+    <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-32">
       <Container>
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
@@ -14,7 +14,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-balance">
               Build better products{' '}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 faster
@@ -23,7 +23,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.p
-            className="mt-6 text-lg leading-8 text-muted-foreground sm:text-xl"
+            className="mt-6 text-lg leading-8 text-muted-foreground sm:text-xl max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -38,7 +38,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Button size="lg" className="min-w-[200px]">
+            <Button size="lg" className="min-w-[200px] shadow-lg hover:shadow-xl">
               Get Started Free
             </Button>
             <Button variant="outline" size="lg" className="min-w-[200px]">

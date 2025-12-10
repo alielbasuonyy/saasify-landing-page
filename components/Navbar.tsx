@@ -8,7 +8,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 export default function Navbar() {
   return (
     <motion.nav
-      className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-lg"
+      className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
@@ -16,7 +16,7 @@ export default function Navbar() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-8">
-            <a href="#" className="text-xl font-bold">
+            <a href="#" className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               SaaSify
             </a>
             <div className="hidden space-x-6 md:flex">
